@@ -1,20 +1,24 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
-const PORT=4444;
-
-
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
 const app = express();
+const DB_CONNECT = process.env.DB_CONNECT
+const PORT = process.env.PORT
 
 mongoose
-.connect('mongodb+srv://pugehok:3429382q@cluster0.klurzlj.mongodb.net/?retryWrites=true&w=majority')
+.connect(DB_CONNECT)
 .then(()=> console.log("База данных запущена"))
 .catch((e)=> console.log(`База данных не смогла запуститься ${e}`))
+
+
+
 app.use(express.json())
 
 
-app.listen(PORT, (req,res)=>{
-    console.log(`Server succeful started on port ${PORT}`)
+app.listen(PORT || 4000, (req,res)=>{
+    console.log(`Server succeful started on port ${process.env.PORT}`)
 });
 
 app.get('/cards', (req,res) =>{
