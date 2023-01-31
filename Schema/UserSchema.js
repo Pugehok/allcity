@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    password:{
+    passwordHash:{
         type:String,
         require:true
     },
