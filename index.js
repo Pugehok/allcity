@@ -5,7 +5,6 @@ import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-d
 import { registerValidator } from './Validation/AuthValidation.js'
 import UserModel from './Schema/UserSchema.js'
 import { validationResult } from 'express-validator'
-
 dotenv.config()
 const app = express();
 const DB_CONNECT = process.env.DB_CONNECT
@@ -26,16 +25,44 @@ app.listen(PORT || 4000, (req,res)=>{
 });
 
 app.get('/cards', (req,res) =>{
+});
+
+
+
+app.post('/register', registerValidator, async (req,res) =>{
+    try {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            console.log(errors)
+            return res.status(400).json(errors.array())
+        }
+           
     
-});
-
-
-app.post('/register', registerValidator, (req,res) =>{
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        console.log(errors)
-        return res.status(400).json(errors.array())
+        const password = req.body.password
+        const salt = await bcrypt.genSalt(7)
+        const passwordHash = await bcrypt.hash(password,salt)
+        const NewUser = new UserModel ({
+        login: req.body.userName,
+        email: req.body.email,
+        firstname: req.body.fullName,
+        lastname: req.body.lastName,
+        password:passwordHash
+        }) 
+    
+        const user = await NewUser.save()
+       res.json(user)
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: "Не удалось зарегистрироваться"
+        })
     }
+  
 
-    res.send('Вы зарегаались')
 });
+
+
+
+
+

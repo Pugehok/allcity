@@ -6,6 +6,11 @@ const UserSchema = new mongoose.Schema({
         require: true,
         unique: true
     },
+     email:{
+        type:String,
+        require:true,
+        unique: true
+    },
     avatar:{
         type:String,
     },
@@ -21,14 +26,9 @@ const UserSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    email:{
-        type:String,
-        require:true,
-        unique: true
-    },
+   
     phone:{
         type:String,
-        require:true,
     },
     publication:{
         type:Array,
