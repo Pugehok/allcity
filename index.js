@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt'
 import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import { registerValidator } from './Validation/AuthValidation.js'
 import UserModel from './Schema/UserSchema.js'
+import UserModel from './Schema/PostSchema.js'
 import { validationResult } from 'express-validator'
 dotenv.config()
 const app = express();
