@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
         try {
            const decoded = jwt.verify(token, 'secret123');
            req.userId = decoded._id;
+           req.UserRole = decoded.role
             next();
         } catch (error) {
             return res.status(403).json({
@@ -17,7 +18,16 @@ import jwt from 'jsonwebtoken'
             message:"Нет доступа"
         })
     }
-
 }
 
-export default chekAuth
+
+export const getUserId = (token) =>{
+    try {
+        const decoded = jwt.verify(token, 'secret123');
+        return decoded._id
+ 
+    } catch (error) {
+        console.log(error)
+    }
+}
+export default chekAuth 

@@ -1,41 +1,29 @@
 import mongoose from 'mongoose'
 
 const PostSchema = new mongoose.Schema({
-    
-    publishman:{
+    title:{
         type:String,
-        require:true
+        required:true,
     },
-    location:{
+    text:{
         type:String,
-        require: true,
-    },
-    photo:{
-        type: string,
-        require: true,
-    },
-    author:{
-        type: string,
+        required:true,
     },
     tags:{
-        type:string
+        type: Array,
+        default:[]
     },
-    // views amount of views in numbers
-    views :{
-        type:number
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User',
+        required: true
     },
-    views :{
-        type:number
+    viewsCount:{
+        type:Number,
+        default: 0
     },
-    comments:{
-        type: array
-    },
-    onmoderation:{
-        type:Boolean,
-    }
-}, {
-    timestamps:true
-})
+    imageUrl:String,
+}, {timestamps:true} )
 
 
 export default mongoose.model('Post', PostSchema)
