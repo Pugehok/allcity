@@ -19,15 +19,4 @@ import jwt from 'jsonwebtoken'
         })
     }
 }
-
-
-export const getUserId = (token) =>{
-    try {
-        const decoded = jwt.verify(token, 'secret123');
-        return decoded._id
- 
-    } catch (error) {
-        console.log(error)
-    }
-}
 export default chekAuth 
