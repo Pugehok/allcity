@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from 'dotenv' 
 import { registerValidator } from './Validation/AuthValidation.js'
 import {UserController, PostController} from './controllers/index.js'
 import checkAuth  from './middleware/checkAuth.js'
