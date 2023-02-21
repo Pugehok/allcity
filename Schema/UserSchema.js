@@ -19,11 +19,11 @@ const UserSchema = new mongoose.Schema({
     avatar:{
         type:String,
     },
-    firstname:{
+    firstName:{
         type:String,
         required: true
     },
-    lastname:{
+    lastName:{
         type:String,
         required:true
     },
