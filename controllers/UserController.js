@@ -7,12 +7,8 @@ import jwt from 'jsonwebtoken'
 export const register = async (req, res) =>{
 
         try {
-            const errors = validationResult(req);
-            if(!errors.isEmpty()){
-                console.log(errors)
-                return res.status(400).json(errors.array())
-            }
-               
+           
+                        
         
             const password = req.body.password
             const salt = await bcrypt.genSalt(7)
@@ -106,7 +102,7 @@ export const getMe = async (req,res) =>{
         })
     } catch (error) {
         res.status(500).json({
-            message:"Нет досутпа"
+            message:"Нет доступа"
         })
     }
 }

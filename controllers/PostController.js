@@ -1,7 +1,6 @@
 import {postCreateValidator} from '../Validation/PostValidation.js'
 import PostModel from '../Schema/PostSchema.js'
 import { validationResult } from 'express-validator'
-import { getUserId } from '../middleware/checkAuth.js'
 
 export const getAll = async (req,res) =>{
     try {
@@ -28,11 +27,10 @@ export const create = async (req,res) =>{
         user: req.userId
     }) 
 
-    const post = await doc.save().then((d) => {
+    const post = await doc.save().then(() => {
         res.status(200).json({
             message:'Ваш пост успешно создан'
         })
-        console.log(`пользователь - ${req.userId} создал новый пост`)
     }).catch((err)=>{
         console.log(err)
         res.status(300).json({
