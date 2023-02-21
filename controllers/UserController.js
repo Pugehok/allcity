@@ -5,19 +5,21 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) =>{
-
+    
         try {
            
-                        
-        
-            const password = req.body.password
+                      
+            const data = {...req.body}
+            const password = data.password
+            console.log(data.firstName)
             const salt = await bcrypt.genSalt(7)
             const hash = await bcrypt.hash(password,salt)
             const UserData = new UserModel ({
-            login: req.body.userName,
-            email: req.body.email,
-            firstname: req.body.fullName,
-            lastname: req.body.lastName,
+            login: data.userName,
+            email: data.email,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            phone: data.phone,
             passwordHash:hash
             }) 
         
@@ -31,7 +33,7 @@ export const register = async (req, res) =>{
                 expiresIn:'30d',
             })
     
-        const {passwordHash, ...userData} = user._doc
+        const {passwordHash, phone, ...userData} = user._doc
     
             res.json({
                 ...userData,
